@@ -219,6 +219,22 @@ Inheritance
 
 	A reference variable of a superclass can be assigned a reference to any subclass derived from that superclass. You will find this aspect of inheritance quite useful in a variety of situations.
 
+	class Box {
+	}
+	
+	class BoxWeight extends Box {
+		double weight;
+	}
+
+	public class RefDemo{
+		public static void main(String[] args){
+			BoxWeight weightbox = new BoxWeight();
+			Box plainbox = new Box();
+			plainbox = weightbox;
+			// System.out.println("Weight of plainbox is " + plainbox.weight);
+		}
+	}
+
 	Here, weightbox is a reference to BoxWeight objects, and plainbox is a reference to Box objects. Since BoxWeight is a subclass of Box, it is permissible to assign plainbox a reference to the weightbox object.
 
 	It is important to understand that it is the type of the reference variable—not the type of the object that it refers to—that determines what members can be accessed. That is, when a reference to a subclass object is assigned to a superclass reference variable, you will have access only to those parts of the object defined by the superclass. This is why plainbox can’t access weight even when it refers to a BoxWeight object. If you think about it, this makes sense, because the superclass has no knowledge of what a subclass adds to it. This is why the last line of code in the preceding fragment is commented out. It is not possible for a Box reference to access the weight field, because Box does not define one.
