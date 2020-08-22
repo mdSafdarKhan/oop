@@ -283,6 +283,24 @@ Using Abstract Classes
 
 	Any class that contains one or more abstract methods must also be declared abstract. To declare a class abstract, you simply use the abstract keyword in front of the class keyword at the beginning of the class declaration. There can be no objects of an abstract class. That is, an abstract class cannot be directly instantiated with the new operator. Such objects would be useless, because an abstract class is not fully defined. Also, you cannot declare abstract constructors, or abstract static methods. Any subclass of an abstract class must either implement all of the abstract methods in the superclass, or be declared abstract itself.
 
+	abstract class A {
+		abstract void callme();
+		void callmetoo() {
+			System.out.println("This is a concrete method.");
+		}
+	}
+	class B extends A {
+		void callme() {
+		System.out.println("B's implementation of callme.");
+		}
+	}
+	class AbstractDemo {
+		public static void main(String args[]) {
+			B b = new B();
+			b.callme();
+			b.callmetoo();
+		}
+	}
 	Notice that no objects of class A are declared in the program. As mentioned, it is not possible to instantiate an abstract class. One other point: class A implements a concrete method called callmetoo( ). This is perfectly acceptable. Abstract classes can include as much implementation as they see fit.
 
 	Although abstract classes cannot be used to instantiate objects, they can be used to create object references, because Java’s approach to run-time polymorphism is implemented through the use of superclass references. Thus, it must be possible to create a reference to an abstract class so that it can be used to point to a subclass object.
