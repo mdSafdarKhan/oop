@@ -335,6 +335,23 @@ Default Interface Methods
 	A primary motivation for the default method was to provide a means by which interfaces could be expanded without breaking existing code. Recall that there must be implementations for all methods defined by an interface. In the past, if a new method were added to a popular, widely used interface, then the addition of that method would break existing code because no implementation would be found for that new method. The default method solves this problem by supplying an implementation that will be used if no other implementation is explicitly provided. Thus, the addition of a default method will not cause preexisting code to break.
 
 Multiple Inheritance Issues
+
+	interface Alpha{
+	    default void reset(){
+		System.out.println("alpha");
+	    }
+	}
+	interface Beta extends Alpha{
+	    default void reset(){
+		System.out.println("beta");
+	    }
+	}
+	class Test implements Alpha, Beta{
+		public void reset(){
+			System.out.println("overridden");
+	    	}
+	}
+
 	For example, assume that two interfaces called Alpha and Beta are implemented by a class called MyClass. What happens if both Alpha and Beta provide a method called reset( ) for which both declare a default implementation? Is the version by Alpha or the version by Beta used by MyClass? Or, consider a situation in which Beta extends Alpha. Which version of the default method is used? Or, what if MyClass provides its own implementation of the method? To handle these and other similar types of situations, Java defines a set of rules that resolves such conflicts.
 
 	First, in all cases, a class implementation takes priority over an interface default implementation. Thus, if MyClass provides an override of the reset( ) default method, MyClass’ version is used. This is the case even if MyClass implements both Alpha and Beta. In this case, both defaults are overridden by MyClass’ implementation.
